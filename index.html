@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Para o amor da minha vida.</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #audio-player {
+          position: fixed;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0,0,0,0.7);
+          padding: 10px 20px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: white;
+          font-family: Arial, sans-serif;
+          z-index: 1000;
+        }
+        #audio-player button {
+          background: transparent;
+          border: none;
+          color: white;
+          font-size: 18px;
+          cursor: pointer;
+        }
+        #audio-player input[type=range] {
+          width: 100px;
+        }
+      </style>
+</head>
+<body>
+    <div id="audio-player">
+        <button id="play-pause" aria-label="Play/Pause">▶️</button>
+        <input type="range" id="volume" min="0" max="1" step="0.01" />
+        <span>No.1 Party Anthem - Arctic Monkeys</span>
+      </div>
+    
+      <audio id="music" src="audio/no1-party-anthem.mp3" preload="auto" loop></audio>
+    
+      <script>
+        const music = document.getElementById('music');
+        const playPauseBtn = document.getElementById('play-pause');
+        const volumeSlider = document.getElementById('volume');
+        music.volume = 0.2;
+        volumeSlider.value = music.volume;
+        window.addEventListener('load', () => {
+            music.play().catch(() => {
+                playPauseBtn.textContent = '▶️';
+      });
+    });
+    playPauseBtn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        playPauseBtn.textContent = '⏸️';
+      } else {
+        music.pause();
+        playPauseBtn.textContent = '▶️';
+      }
+    });
+    volumeSlider.addEventListener('input', () => {
+      music.volume = volumeSlider.value;
+    });
+    music.addEventListener('play', () => {
+      playPauseBtn.textContent = '⏸️';
+    });
+    music.addEventListener('pause', () => {
+      playPauseBtn.textContent = '▶️';
+    });
+  </script>
+
+  <div class="container">
+    <h1>Oi, Cibele!</h1>
+    <p>Esse site é só pra te lembrar o quanto eu te amo e como você é especial pra mim, por mais que não há coisas nesse mundo que consiga transmitir meu amor por voce.</p>
+    <button onclick="mostrarMensagem()">Clique aqui rs</button>
+    <p id="mensagem" class="mensagem-escondida"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
